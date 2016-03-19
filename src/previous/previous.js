@@ -17,7 +17,7 @@ export const ViewModel = Map.extend({
      * The `*` imports the `TxnModel` into the current template instead of into
      * a parent component's viewModel.
      */
-    model: { },
+    model: {},
 
     /**
      * Holds the xhr/promise made by the model.
@@ -111,6 +111,9 @@ export const ViewModel = Map.extend({
     });
   },
 
+  /**
+   * Builds the query params based on the provided attributes.
+   */
   makeParams(value){
     let params = {};
     params[this.attr('attr')] = {};
