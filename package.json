@@ -1,0 +1,76 @@
+{
+  "name": "next-record",
+  "version": "0.0.0",
+  "description": "Components to retrieve the next or previous record from a supplied model.",
+  "homepage": "https://github.com/icanjs/next-record",
+  "author": {
+    "name": "Marshall Thompson",
+    "email": "marshall@creativeideal.net",
+    "url": "https://github.com/icanjs"
+  },
+  "scripts": {
+    "preversion": "npm test && npm run build",
+    "version": "git commit -am \"Update dist for release\" && git checkout -b release && git add -f dist/",
+    "postversion": "git push --tags && git checkout master && git branch -D release && git push",
+    "testee": "testee src/test/test.html --browsers firefox",
+    "test": "npm run jshint && npm run testee",
+    "jshint": "jshint src/. --config",
+    "release:patch": "npm version patch && npm publish",
+    "release:minor": "npm version minor && npm publish",
+    "release:major": "npm version major && npm publish",
+    "build": "node build.js",
+    "document": "documentjs",
+    "develop": "can-serve --static --develop --port 8080"
+  },
+  "main": "dist/cjs/next-record",
+  "browser": {
+    "transform": [
+      "cssify"
+    ]
+  },
+  "browserify": {
+    "transform": [
+      "cssify"
+    ]
+  },
+  "keywords": [
+    "canjs",
+    "can",
+    "component"
+  ],
+  "system": {
+    "main": "next-record",
+    "directories": {
+      "lib": "src"
+    },
+    "configDependencies": [
+      "live-reload"
+    ],
+    "npmIgnore": [
+      "documentjs",
+      "testee",
+      "generator-donejs",
+      "donejs-cli",
+      "steal-tools"
+    ],
+    "npmAlgorithm": "flat"
+  },
+  "dependencies": {
+    "can": "^2.3.16",
+    "jquery": "~2.2.1"
+  },
+  "devDependencies": {
+    "can-connect": "^0.5.0-pre.2",
+    "can-fixture": "^0.1.2",
+    "can-ssr": "^0.11.6",
+    "cssify": "^0.6.0",
+    "documentjs": "^0.4.2",
+    "donejs-cli": "^0.7.0",
+    "generator-donejs": "^0.7.0",
+    "jshint": "^2.9.1",
+    "steal": "^0.14.0",
+    "steal-qunit": "^0.1.1",
+    "steal-tools": "^0.14.0",
+    "testee": "^0.2.4"
+  }
+}
