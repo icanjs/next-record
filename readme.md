@@ -1,4 +1,4 @@
-# next-record
+# <next-record> & <previous-record>
 CanJS Components to retrieve the next or previous record from a supplied model.
 
 [![Build Status](https://travis-ci.org/icanjs/next-record.png?branch=master)](https://travis-ci.org/icanjs/next-record)
@@ -6,6 +6,11 @@ CanJS Components to retrieve the next or previous record from a supplied model.
 Includes the `<next-record>` and `<previous-record>` components.
 
 ## Installation
+
+```
+npm install next-record --save
+```
+
 This component requires either a can-connect model or a can.Model.  Using CanJS's built-in support for StealJS, you can now import the model and components directly inside your template:
 
 ```html
@@ -59,13 +64,13 @@ and passing them to the model that you provide.  Notice in above examples that t
  * `recordVarName` - This determines the variable name where the found record will be available within the component's scope.  By default it is on `record`, but you can change it to better describe the data it represents. For example:
 
  ```html
- <previous-record {model}="@*AppointmentModel" {value}="timestamp" record-var-name="appointment">
-   {{appointment}}
- </previous-record>
+<previous-record {model}="@*AppointmentModel" {value}="timestamp" record-var-name="appointment">
+ {{appointment}}
+</previous-record>
 
- <previous-record {model}="@*TransactionModel" {value}="timestamp" record-var-name="transaction">
-   {{transaction}}
- </previous-record>
+<previous-record {model}="@*TransactionModel" {value}="timestamp" record-var-name="transaction">
+ {{transaction}}
+</previous-record>
  ```
 
 
