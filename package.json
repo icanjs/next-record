@@ -1,6 +1,6 @@
 {
   "name": "next-record",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Components to retrieve the next or previous record from a supplied model.",
   "homepage": "https://github.com/icanjs/next-record",
   "author": {
