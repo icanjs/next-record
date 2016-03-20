@@ -20,13 +20,16 @@ This component requires either a can-connect model or a can.Model.  Using CanJS'
 <can-import from="models/my-model" {^@value}="*MyModel"/>
 
 <!-- This example assumes that a parent component has a timestamp attribute. -->
-<next-record {model}="@*TxnModel" {value}="timestamp">
-  {{record}}
-</next-record>
+{{#if *TxnModel}}
+	<next-record {model}="@*TxnModel" {value}="timestamp">
+	  {{record}}
+	</next-record>
 
-<previous-record {model}="@*TxnModel" {value}="timestamp">
-  {{record}}
-</previous-record>
+	<!-- If you're using a DoneJS-generated Model. -->
+	<previous-record {model}="@*TxnModel.default" {value}="timestamp">
+	  {{record}}
+	</previous-record>
+{{/if}}
 ```
 
 For installing in a CommonJS, AMD, or Standalone environment, please see the [usage page](./usage.md).
@@ -42,9 +45,11 @@ The first step is to provide a model that implements a `findAll` function.  You 
 The `*` before `MyModel` creates a template variable named `*MyModel` that can be used anywhere in the current template.  Because this variable represents a function, in order to pass it to a component, we have to use the `@` operator to pass the function by reference (like a normal variable) instead of calling it. So, passing it into a component looks like this:
 
 ```html
-<next-record {model}="@*TxnModel" {value}="timestamp">
-  {{record}}
-</next-record>
+{{#if *TxnModel}}
+	<next-record {model}="@*TxnModel" {value}="timestamp">
+	  {{record}}
+	</next-record>
+{{/if}}
 ```
 
 The `next-record` and `previous-record` components work by creating query params in this format:
@@ -64,15 +69,18 @@ and passing them to the model that you provide.  Notice in above examples that t
  * `recordVarName` - This determines the variable name where the found record will be available within the component's scope.  By default it is on `record`, but you can change it to better describe the data it represents. For example:
 
  ```html
-<previous-record {model}="@*AppointmentModel" {value}="timestamp" record-var-name="appointment">
- {{appointment}}
-</previous-record>
+ {{#if *TxnModel}}
+	<previous-record {model}="@*AppointmentModel" {value}="timestamp" record-var-name="appointment">
+	 {{appointment}}
+	</previous-record>
 
-<previous-record {model}="@*TransactionModel" {value}="timestamp" record-var-name="transaction">
- {{transaction}}
-</previous-record>
+	<previous-record {model}="@*TransactionModel" {value}="timestamp" record-var-name="transaction">
+	 {{transaction}}
+	</previous-record>
+{{/if}}
  ```
 
+As mentioned in the first example, keep in mind that if your model's file has multiple exports, or if you're using a default export along with a named export, you'll need to provide the correct attribute when passing the model: `{model}="@*TransactionModel.default"`.  This is the case when using a DoneJS-generated SuperModel.
 
 ## Contributing
 
