@@ -1,4 +1,4 @@
-# <next-record> & <previous-record>
+# `<next-record>` & `<previous-record>`
 CanJS Components to retrieve the next or previous record from a supplied model.
 
 [![Build Status](https://travis-ci.org/icanjs/next-record.png?branch=master)](https://travis-ci.org/icanjs/next-record)
