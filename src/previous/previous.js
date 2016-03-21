@@ -1,4 +1,5 @@
 import Component from 'can/component/';
+import can from 'can';
 import Map from 'can/map/';
 import 'can/map/define/';
 import './previous.less!';
@@ -115,12 +116,17 @@ export const ViewModel = Map.extend({
    * Builds the query params based on the provided attributes.
    */
   makeParams(value){
-    let params = {};
+    let params = {},
+      additionalParams = this.attr('additionalParams');
+    if (additionalParams && additionalParams.attr) {
+      additionalParams = additionalParams.attr();
+    }
     params[this.attr('attr')] = {};
     params[this.attr('attr')][this.attr('ltKey')] = value || this.attr('value');
     params[this.attr('limitKey')] = 1;
     params.$sort = {};
     params.$sort[this.attr('attr')] = -1;
+    can.extend(params, additionalParams);
     return params;
   }
 });
