@@ -116,6 +116,8 @@ export const ViewModel = Map.extend({
     params[this.attr('attr')] = {};
     params[this.attr('attr')][this.attr('gtKey')] = value || this.attr('value');
     params[this.attr('limitKey')] = 1;
+    params.$sort = {};
+    params.$sort[this.attr('attr')] = 1;
     return params;
   }
 });

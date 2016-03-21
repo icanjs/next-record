@@ -75,29 +75,29 @@ QUnit.test('Defaults', function(){
 
   QUnit.equal(vm.attr('recordVarName'), 'record', 'The default record variable name is "record".');
   QUnit.equal(vm.attr('record'), undefined, 'There is no record by default.');
-  QUnit.deepEqual(vm.attr('params'), {'date':{$lt: undefined}, $limit: 1}, 'Default params are in place.');
+  QUnit.deepEqual(vm.attr('params'), {'date':{$lt: undefined}, $limit: 1, $sort: { date: -1 }}, 'Default params are in place.');
 
   // Set up a working model
   vm.attr('model', Transaction);
 
   // Change the value for $lt
   vm.attr('value', 'test the delay');
-  QUnit.deepEqual(vm.attr('params'), {'date':{$lt: 'test the delay'}, $limit: 1}, 'Changing the value updates the params.');
+  QUnit.deepEqual(vm.attr('params'), {'date':{$lt: 'test the delay'}, $limit: 1, $sort: { date: -1 }}, 'Changing the value updates the params.');
   QUnit.deepEqual(vm.attr('request') instanceof Promise, true, 'Setting a value triggered a request.');
 
   // Change the ltKey
   vm.attr('ltKey', '>');
-  QUnit.deepEqual(vm.attr('params'), {'date':{'>': 'test the delay'}, $limit: 1}, 'Changing the ltKey updates the params.');
+  QUnit.deepEqual(vm.attr('params'), {'date':{'>': 'test the delay'}, $limit: 1, $sort: { date: -1 }}, 'Changing the ltKey updates the params.');
   vm.attr('ltKey', '$lt');
 
   // Change the limitKey
   vm.attr('limitKey', 'limit');
-  QUnit.deepEqual(vm.attr('params'), {'date':{'$lt': 'test the delay'}, limit: 1}, 'Changing the ltKey updates the params.');
+  QUnit.deepEqual(vm.attr('params'), {'date':{'$lt': 'test the delay'}, limit: 1, $sort: { date: -1 }}, 'Changing the ltKey updates the params.');
   vm.attr('limitKey', '$limit');
 
   // Change the attr in the query.
   vm.attr('attr', 'createdAt');
-  QUnit.deepEqual(vm.attr('params'), {'createdAt':{$lt: 'test the delay'}, $limit: 1}, 'Changing the attr updates the params.');
+  QUnit.deepEqual(vm.attr('params'), {'createdAt':{$lt: 'test the delay'}, $limit: 1, $sort: { createdAt: -1 }}, 'Changing the attr updates the params.');
   vm.attr({}, true);
 });
 
