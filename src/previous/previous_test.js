@@ -92,13 +92,13 @@ QUnit.test('Defaults', function(){
 
   // Change the limitKey
   vm.attr('limitKey', 'limit');
-  QUnit.deepEqual(vm.attr('params'), {'date':{'$lt': 'test the delay'}, limit: 1, $sort: { date: -1 }}, 'Changing the ltKey updates the params.');
+  QUnit.deepEqual(vm.attr('params'), {'date':{'$lt': 'test the delay'}, limit: 1, $sort: { date: -1 }}, 'Changing the limitKey updates the params.');
   vm.attr('limitKey', '$limit');
 
   // additionalParams get mixed in.
-  vm.attr('additionalParams', {test: 123});
-  QUnit.deepEqual(vm.attr('params'), {'date':{'$lt': 'test the delay'}, $limit: 1, $sort: { date: -1 }, test: 123}, 'Changing the gtKey updates the params.');
-  vm.removeAttr('additionalParams');
+  vm.attr('paramTest', 123);
+  QUnit.deepEqual(vm.attr('params'), {'date':{'$lt': 'test the delay'}, $limit: 1, $sort: { date: -1 }, test: 123}, 'Can add in custom params.');
+  vm.removeAttr('paramTest');
 
   // Change the attr in the query.
   vm.attr('attr', 'createdAt');

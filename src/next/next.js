@@ -123,7 +123,14 @@ export const ViewModel = Map.extend({
     params[this.attr('limitKey')] = 1;
     params.$sort = {};
     params.$sort[this.attr('attr')] = 1;
-    can.extend(params, additionalParams);
+    // Merge in all attributes that start with 'param'
+    Object.keys(this.attr()).forEach(key => {
+      if (key.startsWith('param')) {
+        let newKey = key.replace('param', '');
+        newKey = newKey[0].toLowerCase() + newKey.slice(1);
+        params[newKey] = this.attr(key);
+      }
+    });
     return params;
   }
 });
