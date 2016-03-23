@@ -112,11 +112,7 @@ export const ViewModel = Map.extend({
   },
 
   makeParams(value){
-    let params = {},
-      additionalParams = this.attr('additionalParams');
-    if (additionalParams && additionalParams.attr) {
-      additionalParams = additionalParams.attr();
-    }
+    let params = {};
     params[this.attr('attr')] = {};
     params[this.attr('attr')][this.attr('gtKey')] = value || this.attr('value');
     params[this.attr('limitKey')] = 1;

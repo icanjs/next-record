@@ -115,11 +115,7 @@ export const ViewModel = Map.extend({
    * Builds the query params based on the provided attributes.
    */
   makeParams(value){
-    let params = {},
-      additionalParams = this.attr('additionalParams');
-    if (additionalParams && additionalParams.attr) {
-      additionalParams = additionalParams.attr();
-    }
+    let params = {};
     params[this.attr('attr')] = {};
     params[this.attr('attr')][this.attr('ltKey')] = value || this.attr('value');
     params[this.attr('limitKey')] = 1;

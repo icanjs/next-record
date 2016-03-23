@@ -11,7 +11,8 @@ Includes the `<next-record>` and `<previous-record>` components.
 npm install next-record --save
 ```
 
-This component requires either a can-connect model or a can.Model.  Using CanJS's built-in support for StealJS, you can now import the model and components directly inside your template:
+This component requires either a can-connect model or a can.Model that implements `findAll`.  
+Using CanJS's built-in support for StealJS, you can now import the model and components directly inside your template:
 
 ```html
 <!-- This can-import includes both components. -->
@@ -20,13 +21,13 @@ This component requires either a can-connect model or a can.Model.  Using CanJS'
 <can-import from="models/my-model" {^@value}="*MyModel"/>
 
 <!-- This example assumes that a parent component has a timestamp attribute. -->
-{{#if *TxnModel}}
-	<next-record {model}="@*TxnModel" {value}="timestamp">
+{{#if *MyModel}}
+	<next-record {model}="@*MyModel" {value}="timestamp">
 	  {{record}}
 	</next-record>
 
 	<!-- If you're using a DoneJS-generated Model. -->
-	<previous-record {model}="@*TxnModel.default" {value}="timestamp">
+	<previous-record {model}="@*MyModel.default" {value}="timestamp">
 	  {{record}}
 	</previous-record>
 {{/if}}
@@ -69,18 +70,37 @@ and passing them to the model that you provide.  Notice in above examples that t
  * `recordVarName` - This determines the variable name where the found record will be available within the component's scope.  By default it is on `record`, but you can change it to better describe the data it represents. For example:
 
  ```html
- {{#if *TxnModel}}
+ {{#if *AppointmentModel}}
 	<previous-record {model}="@*AppointmentModel" {value}="timestamp" record-var-name="appointment">
 	 {{appointment}}
 	</previous-record>
+{{/if}}
 
-	<previous-record {model}="@*TransactionModel" {value}="timestamp" record-var-name="transaction">
+{{#if *TxnModel}}
+	<previous-record {model}="@*TxnModel" {value}="timestamp" record-var-name="transaction">
 	 {{transaction}}
 	</previous-record>
 {{/if}}
  ```
 
-As mentioned in the first example, keep in mind that if your model's file has multiple exports, or if you're using a default export along with a named export, you'll need to provide the correct attribute when passing the model: `{model}="@*TransactionModel.default"`.  This is the case when using a DoneJS-generated SuperModel.
+As mentioned in the first example, keep in mind that if your model's file has multiple exports, or if you're using a default export along with a named export, you'll need to provide the correct attribute when passing the model: `{model}="@*TxnModel.default"`.  This is the case when using a DoneJS-generated SuperModel.
+
+* `param-whatever` - You can pass custom params by prefixing them with `param-`.  Assuming the there is an account object in a parent component's scope with an `_id` property of `1234`, the below example will add `{accountId: 1234}` to the params:
+
+```html
+{{#if *TxnModel}}
+	<previous-record {model}="@*TxnModel"
+			{value}="timestamp"
+			record-var-name="transaction"
+			{param-account-id}="account._id">
+	 {{transaction}}
+	</previous-record>
+{{/if}}
+```
+
+## Changelog
+
+- 1.0.0 - Additional params can be added by using html attributes prefixed with `param-`
 
 ## Contributing
 
