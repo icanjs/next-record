@@ -1,5 +1,4 @@
 import Component from 'can/component/';
-import can from 'can';
 import Map from 'can/map/';
 import 'can/map/define/';
 import './next.less!';

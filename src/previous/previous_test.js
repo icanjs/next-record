@@ -1,6 +1,7 @@
 import QUnit from 'steal-qunit';
 import { ViewModel } from './previous';
 import Transaction from '../test/test-model';
+import can from 'can';
 
 // ViewModel unit tests
 QUnit.module('previous-record');
