@@ -1,7 +1,6 @@
 import QUnit from 'steal-qunit';
 import { ViewModel } from './next';
 import Transaction from '../test/test-model';
-import can from 'can';
 
 // ViewModel unit tests
 QUnit.module('next-record/next');
