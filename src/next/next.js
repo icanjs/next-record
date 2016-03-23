@@ -121,7 +121,7 @@ export const ViewModel = Map.extend({
     // Merge in all attributes that start with 'param'
     Object.keys(this.attr()).forEach(key => {
       if (key.startsWith('param')) {
-        let newKey = key.replace('param', '');
+        let newKey = key.slice(5);
         newKey = newKey[0].toLowerCase() + newKey.slice(1);
         params[newKey] = this.attr(key);
       }
